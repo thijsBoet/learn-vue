@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+	<meta charset='UTF-8'>
+	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+	<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+	<title>Learn Vue</title>
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.1/css/bootstrap.rtl.min.css"
+		integrity="sha512-Oum3efTCTItFSwMKStQtR3+/eSiYA/gpbybhbWSJplrbxWX7Y2RTERGfu3aadY4lRAvTkr1R7/BV0xEVsCwtOg=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<style>
+		.is-loading {background: blue; color: white;}
+	</style>
+</head>
+
+<body>
+	<div id='root'>
+		<!-- v-model | databinding -->
+		<div class='container mt-3'>
+			<form>
+				<div class="form-group">
+					<input id="input" class="form-control" type="text" name="input" v-model="message">
+				</div>
+				<small id="emailHelp" class="form-text text-muted">The value of your input is: <strong>{{ message
+						}}</strong></small>
+				<button type="submit" class="btn btn-primary form-control mt-3">Submit</button>
+			</form>
+		</div>
+		<!-- v-for -->
+		<div class='container'>
+			<div class='form-group'>
+				<ul class="list-group mt-3">
+					<li v-for="name in names" class="list-group-item">{{ name }}</li>
+				</ul>
+				<input class="form-control mt-3" type="text" v:model="newName">
+				<button @click="addName" class="btn btn-primary">Add
+					Name</button>
+			</div>
+		</div>
+		<!-- Attribute binding -->
+		<div class='container mt-3'>
+			<button :title="title">Hover over me</button>
+			<button :class="{ 'is-loading': isLoading }" @click="toggleClass">Click me</button>
+		</div>
+		<!-- Computed properties -->
+		<div class='container'>
+			<h1 class="display-4">{{ reversedMessage }}</h1>
+			<ul class="list-group">
+				<li v-for="task in incompleteTasks" class="list-group-item">{{ task.description }}</li>
+			</ul>
+		</div>
+		
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+	<script>
+
+		let app = new Vue({
+			el: '#root',
+			data: {
+				message: 'Hello World',
+				names: ['Matthijs', 'Marja', 'Kees', 'Muis', 'Assepoes'],
+				newName: '',
+				title: "Now the title is being set through Vue.js",
+				isLoading: false,
+				tasks: [
+					{description: 'Learn Vue.js', completed: false},
+					{description: 'Do some groceries', completed: true},
+					{description: 'Watch new episode of SNL', completed: false},
+					{description: 'Cook some pasta for dinner', completed: false},
+					{description: 'Learn to play some new riffs on guitar', completed: false},
+					{description: 'Read Hitchhikers guide to the Galaxy', completed: false},
+				]
+			},
+
+			methods: {
+				addName() {
+					this.names.push(this.newName);
+					this.newName = "";
+				},
+				toggleClass(){
+					this.isLoading = !this.isLoading
+				}
+			},
+
+			computed: {
+				reversedMessage() {
+					return this.message.split('').reverse().join('');
+				},
+				incompleteTasks() {
+					return this.tasks.filter(task => !task.completed)
+				}
+			}
+		});
+
+	</script>
+
+</body>
+
+</html>
