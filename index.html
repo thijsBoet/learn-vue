@@ -13,6 +13,8 @@
 	<style>
 		.is-loading {background: blue; color: white;}
 	</style>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js" defer></script>
+	<script src='./main.js' defer></script>
 </head>
 
 <body>
@@ -51,50 +53,12 @@
 				<li v-for="task in incompleteTasks" class="list-group-item">{{ task.description }}</li>
 			</ul>
 		</div>
-		
+		<!-- Component -->
+		<div class='container'>
+			<task-list />
+		</div>
 	</div>
-	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-	<script>
-
-		let app = new Vue({
-			el: '#root',
-			data: {
-				message: 'Hello World',
-				names: ['Matthijs', 'Marja', 'Kees', 'Muis', 'Assepoes'],
-				newName: '',
-				title: "Now the title is being set through Vue.js",
-				isLoading: false,
-				tasks: [
-					{description: 'Learn Vue.js', completed: false},
-					{description: 'Do some groceries', completed: true},
-					{description: 'Watch new episode of SNL', completed: false},
-					{description: 'Cook some pasta for dinner', completed: false},
-					{description: 'Learn to play some new riffs on guitar', completed: false},
-					{description: 'Read Hitchhikers guide to the Galaxy', completed: false},
-				]
-			},
-
-			methods: {
-				addName() {
-					this.names.push(this.newName);
-					this.newName = "";
-				},
-				toggleClass(){
-					this.isLoading = !this.isLoading
-				}
-			},
-
-			computed: {
-				reversedMessage() {
-					return this.message.split('').reverse().join('');
-				},
-				incompleteTasks() {
-					return this.tasks.filter(task => !task.completed)
-				}
-			}
-		});
-
-	</script>
+	
 
 </body>
 
