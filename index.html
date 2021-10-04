@@ -10,8 +10,12 @@
 		href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.1/css/bootstrap.rtl.min.css"
 		integrity="sha512-Oum3efTCTItFSwMKStQtR3+/eSiYA/gpbybhbWSJplrbxWX7Y2RTERGfu3aadY4lRAvTkr1R7/BV0xEVsCwtOg=="
 		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 	<style>
 		.is-loading {background: blue; color: white;}
+		.container {
+			margin-top:  18px;
+		}
 	</style>
 	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js" defer></script>
 	<script src='./main.js' defer></script>
@@ -20,29 +24,29 @@
 <body>
 	<div id='root'>
 		<!-- v-model | databinding -->
-		<div class='container mt-3'>
+		<div class='container '>
 			<form>
 				<div class="form-group">
 					<input id="input" class="form-control" type="text" name="input" v-model="message">
 				</div>
 				<small id="emailHelp" class="form-text text-muted">The value of your input is: <strong>{{ message
 						}}</strong></small>
-				<button type="submit" class="btn btn-primary form-control mt-3">Submit</button>
+				<button type="submit" class="btn btn-primary form-control ">Submit</button>
 			</form>
 		</div>
 		<!-- v-for -->
 		<div class='container'>
 			<div class='form-group'>
-				<ul class="list-group mt-3">
+				<ul class="list-group ">
 					<li v-for="name in names" class="list-group-item">{{ name }}</li>
 				</ul>
-				<input class="form-control mt-3" type="text" v:model="newName">
+				<input class="form-control " type="text" v:model="newName">
 				<button @click="addName" class="btn btn-primary">Add
 					Name</button>
 			</div>
 		</div>
 		<!-- Attribute binding -->
-		<div class='container mt-3'>
+		<div class='container '>
 			<button :title="title">Hover over me</button>
 			<button :class="{ 'is-loading': isLoading }" @click="toggleClass">Click me</button>
 		</div>
@@ -56,6 +60,27 @@
 		<!-- Component -->
 		<div class='container'>
 			<task-list />
+		</div> 
+		<div class="container ">
+			<v-message title="Hello World" body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. "></v-message>
+			<v-message title="Hello Universe" body="42 "></v-message>
+		</div>
+		<div class="container ">
+			<vue-modal v-show="showModal"></vue-modal>
+			<button @click="showModal=true" class="btn btn-primary">Show Modal</button>
+		</div>
+		<div class="container ">
+			<tabs>
+				<tab name="About us" :selected="true">
+					<h1>Here is content for the About us tab</h1>
+				</tab>
+				<tab name="About Our Culture">
+					<h1>Here is content for the About Our Culture tab</h1>
+				</tab>
+				<tab name="About Our Vision">
+					<h1>Here is content for the About Our Vision tab</h1>
+				</tab>
+			</tabs>
 		</div>
 	</div>
 	
