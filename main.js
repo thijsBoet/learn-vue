@@ -7,17 +7,18 @@ Vue.component('task-list', {
 
 	data() {
 		return {
-			tasks: [{
+			tasks: [
+				{
 					description: 'Go to the store',
-					completed: false
+					completed: false,
 				},
 				{
 					description: 'Go to the bank',
-					completed: false
+					completed: false,
 				},
 				{
 					description: 'Go to the supermarket',
-					completed: false
+					completed: false,
 				},
 			],
 		};
@@ -33,7 +34,7 @@ Vue.component('task', {
 		return {
 			store: 'Go to the store',
 		};
-	}
+	},
 });
 
 Vue.component('v-message', {
@@ -41,8 +42,8 @@ Vue.component('v-message', {
 
 	data() {
 		return {
-			isVisible: true
-		}
+			isVisible: true,
+		};
 	},
 
 	template: `
@@ -60,21 +61,21 @@ Vue.component('v-message', {
 
 	methods: {
 		hideModal() {
-			this.isVisible = false
-		}
-	}
-})
+			this.isVisible = false;
+		},
+	},
+});
 
 Vue.component('vue-modal', {
 	template: `<div class="modal is-active" >
-							<div class="modal-background"></div>
-							<div class="modal-content">
-								<div class="box">
-									<p>Lorem</p>
-								</div>
-							</div>
-							<button class="modal-close is-large" aria-label="close"></button>
-						</div>`
+					<div class="modal-background"></div>
+					<div class="modal-content">
+						<div class="box">
+							<p><slot></slot></p>
+						</div>
+					</div>
+					<button class="modal-close is-large" @click="$emit('close')"></button>
+				</div>`,
 });
 
 Vue.component('tabs', {
@@ -95,26 +96,26 @@ Vue.component('tabs', {
 	`,
 
 	data() {
-		return  {tabs:[]}
+		return { tabs: [] };
 	},
 
 	methods: {
 		selectTab(selectedTab) {
 			this.tabs.forEach(tab => {
-				tab.isActive = (tab.name == selectedTab.name)
+				tab.isActive = tab.name == selectedTab.name;
 			});
-		}
-	}
-})
+		},
+	},
+});
 
 Vue.component('tab', {
 	props: {
 		name: {
-			required: true
+			required: true,
 		},
 		selected: {
-			default: false
-		}
+			default: false,
+		},
 	},
 	template: `
 		<div><slot></slot></div>
@@ -122,39 +123,39 @@ Vue.component('tab', {
 
 	data() {
 		return {
-			isActive: false
-		}
+			isActive: false,
+		};
 	},
 
 	mounted() {
 		this.isActive = this.selected;
-	}
-})
+	},
+});
 
 new Vue({
 	el: '#root',
 	data: {
-		showModal: false,
 		message: 'Hello World',
 		names: ['Matthijs', 'Marja', 'Kees', 'Muis', 'Assepoes'],
 		newName: '',
 		title: 'Now the title is being set through Vue.js',
 		isLoading: false,
-		tasks: [{
+		tasks: [
+			{
 				description: 'Learn Vue.js',
-				completed: false
+				completed: false,
 			},
 			{
 				description: 'Do some groceries',
-				completed: true
+				completed: true,
 			},
 			{
 				description: 'Watch new episode of SNL',
-				completed: false
+				completed: false,
 			},
 			{
 				description: 'Cook some pasta for dinner',
-				completed: false
+				completed: false,
 			},
 			{
 				description: 'Learn to play some new riffs on guitar',
@@ -162,9 +163,10 @@ new Vue({
 			},
 			{
 				description: 'Read Hitchhikers guide to the Galaxy',
-				completed: false
+				completed: false,
 			},
 		],
+		showModal: false,
 	},
 
 	methods: {
